@@ -8,7 +8,7 @@ import './index.scss';
 import App from './containers/App';
 
 
-const store = createStore(rootReducer, composeWithDevTools)
+const store = createStore(rootReducer, composeWithDevTools())
 
 ReactDOM.render(
   <Provider store ={store}>
@@ -16,4 +16,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'));
 
-x
