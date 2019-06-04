@@ -4,6 +4,9 @@ import { render } from 'react-dom'
 import * as actions from '../../actions'
 import { connect } from 'react-redux'
 import { fetchPokemon } from '../../utils/fetchPokemon';
+import PokeContainer from '../PokeContainer'
+import ErrorPage from '../../components/ErrorPage'
+import LoadingPage from '../../components/LoadingPage'
 
 export class App extends Component {
   componentDidMount() {
@@ -16,9 +19,12 @@ export class App extends Component {
       .catch(err => hasErrored(err))
   }
   render() {
+    const { error, loading } = this.props;
     return (
       <div>
-        
+      { error && <ErrorPage /> }
+      { loading && <LoadingPage /> }
+        <PokeContainer />
       </div>
     )
   }
