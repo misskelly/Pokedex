@@ -7,12 +7,13 @@ import { fetchPokemon } from '../../utils/fetchPokemon';
 
 export class App extends Component {
   componentDidMount() {
-    console.log(this.props, this.state)
-    const { setPokemon } = this.props;
+    const { setPokemon, hasErrored, isLoading } = this.props;
     const url = 'http://localhost:3001/pokemon'
-    fetchPokemon(url)
+    isLoading(true);
+    return fetchPokemon(url)
       .then(poke => setPokemon(poke))
-    // return setPokemon(pokemon);
+      .then(isLoading(false))
+      .catch(err => hasErrored(err))
   }
   render() {
     return (
@@ -31,8 +32,8 @@ export const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
   setPokemon: (pokemon) => dispatch(actions.setPokemon(pokemon)),
-  loading: (bool) => dispatch(actions.isLoading(bool)),
-  error: (message) => dispatch(actions.hasErrored(message))
+  isLoading: (bool) => dispatch(actions.isLoading(bool)),
+  hasErrored: (message) => dispatch(actions.hasErrored(message))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
