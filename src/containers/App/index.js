@@ -22,6 +22,7 @@ export class App extends Component {
     const { error, loading } = this.props;
     return (
       <div>
+        <h1>POKEDEX</h1>
       { error && <ErrorPage /> }
       { loading && <LoadingPage /> }
         <PokeContainer />
